@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ScrollAnimation from '../components/ScrollAnimation';
+import Stats from '../components/Stats';
+import Testimonials from '../components/Testimonials';
+import FAQ from '../components/FAQ';
 
 const Home = () => {
   const features = [
@@ -69,22 +72,22 @@ const Home = () => {
               </div>
             </ScrollAnimation>
             <ScrollAnimation delay={0.2}>
-              <div className="relative mt-8 lg:mt-0">
-                <div className="bg-gradient-to-br from-primary-100 to-accent-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl">
+              <div className="relative mt-8 lg:mt-0 float-animation">
+                <div className="bg-gradient-to-br from-primary-100 to-accent-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl glow-effect">
                   <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg">
                     <div className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">9:41</div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Каталог товаров/услуг</h3>
                     <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                      <div className="bg-gray-100 rounded-lg p-2 sm:p-3">
+                      <div className="bg-gray-100 rounded-lg p-2 sm:p-3 card-hover">
                         <div className="aspect-square bg-gradient-to-br from-primary-200 to-accent-200 rounded mb-2 overflow-hidden">
-                          <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=200&h=200&fit=crop" alt="Товар 1" className="w-full h-full object-cover" />
+                          <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=200&h=200&fit=crop" alt="Товар 1" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
                         </div>
                         <p className="text-xs font-semibold text-gray-700">Товар 1</p>
                         <p className="text-xs text-gray-500">21 000 ₸</p>
                       </div>
-                      <div className="bg-gray-100 rounded-lg p-2 sm:p-3">
+                      <div className="bg-gray-100 rounded-lg p-2 sm:p-3 card-hover">
                         <div className="aspect-square bg-gradient-to-br from-accent-200 to-secondary-200 rounded mb-2 overflow-hidden">
-                          <img src="https://images.unsplash.com/photo-1520763185298-1b434c919655?w=200&h=200&fit=crop" alt="Товар 2" className="w-full h-full object-cover" />
+                          <img src="https://images.unsplash.com/photo-1520763185298-1b434c919655?w=200&h=200&fit=crop" alt="Товар 2" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
                         </div>
                         <p className="text-xs font-semibold text-gray-700">Товар 2</p>
                         <p className="text-xs text-gray-500">39 200 ₸</p>
@@ -92,7 +95,7 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                <div className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-xl border-2 border-primary-200">
+                <div className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 bg-white rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4 shadow-xl border-2 border-primary-200 pulse-animation">
                   <div className="flex items-center gap-1 sm:gap-2">
                     <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center text-white font-bold text-xs sm:text-sm">AI</div>
                     <span className="text-xs sm:text-sm font-semibold text-gray-700 hidden sm:inline">+ ваш личный ИИ-менеджер</span>
@@ -202,6 +205,15 @@ const Home = () => {
           </ScrollAnimation>
         </div>
       </section>
+
+      {/* Stats Section */}
+      <Stats />
+
+      {/* Testimonials Section */}
+      <Testimonials />
+
+      {/* FAQ Section */}
+      <FAQ />
 
     </div>
   );

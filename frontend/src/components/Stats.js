@@ -1,0 +1,69 @@
+import React from 'react';
+import ScrollAnimation from './ScrollAnimation';
+
+const Stats = () => {
+  const stats = [
+    {
+      number: '1000+',
+      label: 'Довольных клиентов',
+      icon: '👥',
+      color: 'from-primary-500 to-primary-600',
+    },
+    {
+      number: '50K+',
+      label: 'Обработанных заказов',
+      icon: '📦',
+      color: 'from-accent-500 to-accent-600',
+    },
+    {
+      number: '24/7',
+      label: 'AI-консультант',
+      icon: '🤖',
+      color: 'from-secondary-500 to-secondary-600',
+    },
+    {
+      number: '99%',
+      label: 'Удовлетворенность',
+      icon: '⭐',
+      color: 'from-primary-500 to-accent-500',
+    },
+  ];
+
+  return (
+    <section className="py-16 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollAnimation>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              OnaQ в цифрах
+            </h2>
+            <p className="text-lg text-gray-600">
+              Результаты, которые говорят сами за себя
+            </p>
+          </div>
+        </ScrollAnimation>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          {stats.map((stat, index) => (
+            <ScrollAnimation key={index} delay={index * 0.1}>
+              <div className="card card-hover text-center glow-effect">
+                <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${stat.color} rounded-2xl flex items-center justify-center text-3xl float-animation`} style={{ animationDelay: `${index * 0.2}s` }}>
+                  {stat.icon}
+                </div>
+                <div className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
+                  {stat.number}
+                </div>
+                <p className="text-sm md:text-base text-gray-600 font-medium">
+                  {stat.label}
+                </p>
+              </div>
+            </ScrollAnimation>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Stats;
+
