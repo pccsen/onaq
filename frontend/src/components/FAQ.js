@@ -38,7 +38,12 @@ const FAQ = () => {
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&h=1080&fit=crop')] opacity-5"></div>
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&h=1080&fit=crop')"
+        }}
+      ></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollAnimation>
           <div className="text-center mb-16">

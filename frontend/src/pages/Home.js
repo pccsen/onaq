@@ -165,7 +165,12 @@ const Home = () => {
                   )}
                   {feature.visual === 'chat' && (
                     <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200&h=200&fit=crop')] opacity-5"></div>
+                      <div 
+                        className="absolute inset-0 opacity-5"
+                        style={{
+                          backgroundImage: "url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200&h=200&fit=crop')"
+                        }}
+                      ></div>
                       <div className="bg-white rounded-lg p-2 sm:p-3 shadow-md relative z-10">
                         <div className="flex items-start gap-2 mb-2">
                           <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-primary-600 to-accent-500 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 shadow-lg">AI</div>
@@ -183,7 +188,12 @@ const Home = () => {
                   )}
                   {feature.visual === 'notification' && (
                     <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=200&h=200&fit=crop')] opacity-5"></div>
+                      <div 
+                        className="absolute inset-0 opacity-5"
+                        style={{
+                          backgroundImage: "url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=200&h=200&fit=crop')"
+                        }}
+                      ></div>
                       <div className="bg-white rounded-lg p-3 sm:p-4 shadow-md relative z-10">
                         <div className="flex items-start gap-3">
                           <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-secondary-500 rounded-full flex items-center justify-center text-white text-sm shadow-lg flex-shrink-0">🔔</div>
@@ -196,7 +206,12 @@ const Home = () => {
                   )}
                   {feature.visual === 'integration' && (
                     <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551650975-87deedd944c3?w=200&h=200&fit=crop')] opacity-5"></div>
+                      <div 
+                        className="absolute inset-0 opacity-5"
+                        style={{
+                          backgroundImage: "url('https://images.unsplash.com/photo-1551650975-87deedd944c3?w=200&h=200&fit=crop')"
+                        }}
+                      ></div>
                       <div className="flex items-center gap-2 sm:gap-4 relative z-10">
                         <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg transform hover:scale-110 transition-transform">📱</div>
                         <div className="text-xl sm:text-2xl text-primary-600 font-bold">→</div>

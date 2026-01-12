@@ -32,7 +32,12 @@ const Stats = () => {
   return (
     <section className="py-16 bg-gradient-to-br from-primary-50 via-white to-accent-50 relative overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926?w=1920&h=1080&fit=crop')] opacity-5"></div>
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1557683316-973673baf926?w=1920&h=1080&fit=crop')"
+        }}
+      ></div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollAnimation>
           <div className="text-center mb-12">
