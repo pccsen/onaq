@@ -39,8 +39,11 @@ const Home = () => {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-white via-gray-50 to-primary-50 py-16 md:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-gradient-to-br from-white via-primary-50/30 to-accent-50/30 py-16 md:py-24 overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-200/20 rounded-full blur-3xl"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollAnimation>
               <div>
@@ -78,19 +81,23 @@ const Home = () => {
                     <div className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">9:41</div>
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Каталог товаров/услуг</h3>
                     <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                      <div className="bg-gray-100 rounded-lg p-2 sm:p-3 card-hover">
-                        <div className="aspect-square bg-gradient-to-br from-primary-200 to-accent-200 rounded mb-2 overflow-hidden">
-                          <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=200&h=200&fit=crop" alt="Товар 1" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
+                      <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-2 sm:p-3 card-hover border border-gray-200 hover:border-primary-300 transition-all relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary-100/0 to-accent-100/0 group-hover:from-primary-100/30 group-hover:to-accent-100/30 transition-all duration-300"></div>
+                        <div className="aspect-square bg-gradient-to-br from-primary-200 to-accent-200 rounded-lg mb-2 overflow-hidden shadow-md group relative">
+                          <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=300&h=300&fit=crop" alt="Товар 1" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 relative z-10" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
                         </div>
-                        <p className="text-xs font-semibold text-gray-700">Товар 1</p>
-                        <p className="text-xs text-gray-500">21 000 ₸</p>
+                        <p className="text-xs font-semibold text-gray-700 relative z-10">Товар 1</p>
+                        <p className="text-xs font-bold text-primary-600 relative z-10">21 000 ₸</p>
                       </div>
-                      <div className="bg-gray-100 rounded-lg p-2 sm:p-3 card-hover">
-                        <div className="aspect-square bg-gradient-to-br from-accent-200 to-secondary-200 rounded mb-2 overflow-hidden">
-                          <img src="https://images.unsplash.com/photo-1520763185298-1b434c919655?w=200&h=200&fit=crop" alt="Товар 2" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
+                      <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-2 sm:p-3 card-hover border border-gray-200 hover:border-accent-300 transition-all relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent-100/0 to-secondary-100/0 group-hover:from-accent-100/30 group-hover:to-secondary-100/30 transition-all duration-300"></div>
+                        <div className="aspect-square bg-gradient-to-br from-accent-200 to-secondary-200 rounded-lg mb-2 overflow-hidden shadow-md group relative">
+                          <img src="https://images.unsplash.com/photo-1520763185298-1b434c919655?w=300&h=300&fit=crop" alt="Товар 2" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 relative z-10" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"></div>
                         </div>
-                        <p className="text-xs font-semibold text-gray-700">Товар 2</p>
-                        <p className="text-xs text-gray-500">39 200 ₸</p>
+                        <p className="text-xs font-semibold text-gray-700 relative z-10">Товар 2</p>
+                        <p className="text-xs font-bold text-accent-600 relative z-10">39 200 ₸</p>
                       </div>
                     </div>
                   </div>
@@ -109,8 +116,21 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50 relative">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%239C92AC\" fill-opacity=\"0.03\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <ScrollAnimation>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 bg-clip-text text-transparent">
+                  Мощные функции
+                </span>
+              </h2>
+              <p className="text-lg text-gray-600">
+                Все необходимое для успешного ведения бизнеса
+              </p>
+            </div>
+          </ScrollAnimation>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {features.map((feature, index) => (
               <ScrollAnimation key={index} delay={index * 0.1}>
@@ -122,24 +142,33 @@ const Home = () => {
                     <h3 className="text-base sm:text-lg font-bold text-gray-900">{feature.title}</h3>
                   </div>
                   {feature.visual === 'dashboard' && (
-                    <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4">
-                      <div className="bg-white rounded p-2 sm:p-3 mb-2">
-                        <div className="text-xl sm:text-2xl font-bold text-primary-600 mb-1">1 060 445</div>
-                        <div className="text-xs sm:text-sm text-gray-600">Продажи по дням</div>
-                        <div className="h-12 sm:h-16 bg-gradient-to-t from-primary-200 to-primary-100 rounded mt-2"></div>
+                    <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary-400/10 to-accent-400/10"></div>
+                      <div className="bg-white rounded-lg p-2 sm:p-3 mb-2 shadow-md relative z-10">
+                        <div className="flex items-center justify-between mb-2">
+                          <div>
+                            <div className="text-xl sm:text-2xl font-bold text-primary-600 mb-1">1 060 445</div>
+                            <div className="text-xs sm:text-sm text-gray-600">Продажи по дням</div>
+                          </div>
+                          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&h=100&fit=crop" alt="График" className="w-12 h-12 rounded-lg object-cover" />
+                        </div>
+                        <div className="h-12 sm:h-16 bg-gradient-to-t from-primary-200 via-primary-100 to-primary-50 rounded mt-2 relative overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-accent-400/20"></div>
+                        </div>
                       </div>
                     </div>
                   )}
                   {feature.visual === 'chat' && (
-                    <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4">
-                      <div className="bg-white rounded-lg p-2 sm:p-3 shadow-sm">
+                    <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200&h=200&fit=crop')] opacity-5"></div>
+                      <div className="bg-white rounded-lg p-2 sm:p-3 shadow-md relative z-10">
                         <div className="flex items-start gap-2 mb-2">
-                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-primary-600 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">AI</div>
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-primary-600 to-accent-500 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 shadow-lg">AI</div>
                           <div className="flex-1 min-w-0">
                             <div className="bg-gray-100 rounded-lg p-1.5 sm:p-2 text-xs text-gray-700 mb-1 break-words">
                               Такой букет сколько стоит?
                             </div>
-                            <div className="bg-primary-100 rounded-lg p-1.5 sm:p-2 text-xs text-gray-700 break-words">
+                            <div className="bg-gradient-to-r from-primary-100 to-accent-100 rounded-lg p-1.5 sm:p-2 text-xs text-gray-700 break-words">
                               Данный букет составляет 300 г
                             </div>
                           </div>
@@ -148,11 +177,12 @@ const Home = () => {
                     </div>
                   )}
                   {feature.visual === 'notification' && (
-                    <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-4 mb-4">
-                      <div className="bg-white rounded-lg p-4 shadow-sm">
-                        <div className="flex items-start gap-2">
-                          <div className="w-6 h-6 bg-accent-500 rounded-full flex items-center justify-center text-white text-xs">🔔</div>
-                          <p className="text-xs text-gray-700">
+                    <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=200&h=200&fit=crop')] opacity-5"></div>
+                      <div className="bg-white rounded-lg p-3 sm:p-4 shadow-md relative z-10">
+                        <div className="flex items-start gap-3">
+                          <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-secondary-500 rounded-full flex items-center justify-center text-white text-sm shadow-lg flex-shrink-0">🔔</div>
+                          <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                             У нас новая поставка весенних букетов. Хотите порадовать своих любимых?
                           </p>
                         </div>
@@ -160,11 +190,12 @@ const Home = () => {
                     </div>
                   )}
                   {feature.visual === 'integration' && (
-                    <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4 flex items-center justify-center">
-                      <div className="flex items-center gap-2 sm:gap-4">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center text-xl sm:text-2xl">📱</div>
-                        <div className="text-xl sm:text-2xl">→</div>
-                        <div className="w-8 h-8 sm:w-12 sm:h-12 bg-primary-600 rounded-lg"></div>
+                    <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg p-3 sm:p-4 mb-4 flex items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551650975-87deedd944c3?w=200&h=200&fit=crop')] opacity-5"></div>
+                      <div className="flex items-center gap-2 sm:gap-4 relative z-10">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg transform hover:scale-110 transition-transform">📱</div>
+                        <div className="text-xl sm:text-2xl text-primary-600 font-bold">→</div>
+                        <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-600 to-accent-600 rounded-lg shadow-lg transform hover:scale-110 transition-transform"></div>
                       </div>
                     </div>
                   )}

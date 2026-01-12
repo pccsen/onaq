@@ -36,8 +36,10 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&h=1080&fit=crop')] opacity-5"></div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollAnimation>
           <div className="text-center mb-16">
             <h2 className="section-title">Часто задаваемые вопросы</h2>
@@ -50,25 +52,28 @@ const FAQ = () => {
         <div className="max-w-3xl mx-auto space-y-4">
           {faqs.map((faq, index) => (
             <ScrollAnimation key={index} delay={index * 0.05}>
-              <div className="card">
-                <button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full flex items-center justify-between text-left"
-                >
-                  <h3 className="text-lg font-bold text-gray-900 pr-4">
-                    {faq.question}
-                  </h3>
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                </button>
-                {openIndex === index && (
-                  <div className="mt-4 pt-4 border-t border-gray-200">
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                  </div>
-                )}
+              <div className="card relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-50/50 to-accent-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <button
+                    onClick={() => toggleFAQ(index)}
+                    className="w-full flex items-center justify-between text-left"
+                  >
+                    <h3 className="text-lg font-bold text-gray-900 pr-4 group-hover:text-primary-600 transition-colors">
+                      {faq.question}
+                    </h3>
+                    <div className={`flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white transition-all duration-300 shadow-lg ${openIndex === index ? 'rotate-180 scale-110' : 'group-hover:scale-110'}`}>
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </button>
+                  {openIndex === index && (
+                    <div className="mt-4 pt-4 border-t border-gradient-to-r from-primary-200 to-accent-200 animate-slide-up">
+                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                    </div>
+                  )}
+                </div>
               </div>
             </ScrollAnimation>
           ))}
