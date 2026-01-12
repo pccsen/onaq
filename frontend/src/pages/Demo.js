@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import ScrollAnimation from '../components/ScrollAnimation';
 import DemoStorefront from '../components/DemoStorefront';
 import AIConsultant from '../components/AIConsultant';
+import OrderAutomation from '../components/OrderAutomation';
+import CRMSystem from '../components/CRMSystem';
+import Analytics from '../components/Analytics';
 
 const Demo = () => {
   const [activeTab, setActiveTab] = useState('storefront');
@@ -54,27 +57,57 @@ const Demo = () => {
       {/* Tabs Section */}
       <section className="py-8 bg-white border-b">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center">
-            <div className="flex space-x-4">
+          <div className="flex justify-center overflow-x-auto">
+            <div className="flex space-x-2 md:space-x-4">
               <button
                 onClick={() => setActiveTab('storefront')}
-                className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
+                className={`px-4 md:px-6 py-3 rounded-xl font-bold transition-all duration-300 whitespace-nowrap text-sm md:text-base ${
                   activeTab === 'storefront'
                     ? 'bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 text-white shadow-xl'
                     : 'bg-gray-100 text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-accent-50 hover:shadow-lg'
                 }`}
               >
-                📦 Витрина товаров/услуг
+                📦 Витрина
+              </button>
+              <button
+                onClick={() => setActiveTab('orders')}
+                className={`px-4 md:px-6 py-3 rounded-xl font-bold transition-all duration-300 whitespace-nowrap text-sm md:text-base ${
+                  activeTab === 'orders'
+                    ? 'bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 text-white shadow-xl'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-accent-50 hover:shadow-lg'
+                }`}
+              >
+                🚀 Заказы
+              </button>
+              <button
+                onClick={() => setActiveTab('crm')}
+                className={`px-4 md:px-6 py-3 rounded-xl font-bold transition-all duration-300 whitespace-nowrap text-sm md:text-base ${
+                  activeTab === 'crm'
+                    ? 'bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 text-white shadow-xl'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-accent-50 hover:shadow-lg'
+                }`}
+              >
+                📊 CRM
+              </button>
+              <button
+                onClick={() => setActiveTab('analytics')}
+                className={`px-4 md:px-6 py-3 rounded-xl font-bold transition-all duration-300 whitespace-nowrap text-sm md:text-base ${
+                  activeTab === 'analytics'
+                    ? 'bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 text-white shadow-xl'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-accent-50 hover:shadow-lg'
+                }`}
+              >
+                📈 Аналитика
               </button>
               <button
                 onClick={() => setActiveTab('ai')}
-                className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
+                className={`px-4 md:px-6 py-3 rounded-xl font-bold transition-all duration-300 whitespace-nowrap text-sm md:text-base ${
                   activeTab === 'ai'
                     ? 'bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 text-white shadow-xl'
                     : 'bg-gray-100 text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-accent-50 hover:shadow-lg'
                 }`}
               >
-                🤖 AI-консультант
+                🤖 AI
               </button>
             </div>
           </div>
@@ -87,6 +120,24 @@ const Demo = () => {
           {activeTab === 'storefront' && (
             <div>
               <DemoStorefront businessType={businessType} />
+            </div>
+          )}
+          
+          {activeTab === 'orders' && (
+            <div>
+              <OrderAutomation businessType={businessType} />
+            </div>
+          )}
+
+          {activeTab === 'crm' && (
+            <div>
+              <CRMSystem businessType={businessType} />
+            </div>
+          )}
+
+          {activeTab === 'analytics' && (
+            <div>
+              <Analytics businessType={businessType} />
             </div>
           )}
           
