@@ -1,29 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ScrollAnimation from './ScrollAnimation';
+import { createOrder, getOrders } from '../utils/api';
+import { useToast } from '../context/ToastContext';
 
 const OrderAutomation = ({ businessType }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState('');
-  const [orders, setOrders] = useState([
-    { id: 1, customer: 'Айгуль К.', service: 'Стрижка женская', date: '2024-01-15', time: '14:00', status: 'подтвержден', price: 2500 },
-    { id: 2, customer: 'Данияр Б.', service: 'Бритье', date: '2024-01-15', time: '16:00', status: 'новый', price: 2000 },
-    { id: 3, customer: 'Елена С.', service: 'Маникюр', date: '2024-01-16', time: '10:00', status: 'подтвержден', price: 1500 },
-  ]);
+  const [selectedService, setSelectedService] = useState(null);
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { success, error } = useToast();
 
   const availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
 
-  const handleBooking = () => {
-    const newOrder = {
-      id: orders.length + 1,
-      customer: 'Новый клиент',
-      service: 'Выбранная услуга',
-      date: selectedDate.toISOString().split('T')[0],
-      time: selectedTime,
-      status: 'новый',
-      price: 0,
-    };
-    setOrders([...orders, newOrder]);
-    alert('Запись успешно создана! (Демо)');
+  useEffect(() => {
+    loadOrders();
+  }, [businessType]);
+
+  const loadOrders = async () => {
+    try {
+      setLoading(true);
+      const response = await getOrders({ businessType });
+      if (response.success) {
+        setOrders(response.data);
+      }
+    } catch (err) {
+      console.error('Error loading orders:', err);
+      // Fallback to demo data if API fails
+      setOrders([
+        { _id: 1, customerName: 'Айгуль К.', serviceName: 'Стрижка женская', date: '2024-01-15', time: '14:00', status: 'подтвержден', price: 2500 },
+        { _id: 2, customerName: 'Данияр Б.', serviceName: 'Бритье', date: '2024-01-15', time: '16:00', status: 'новый', price: 2000 },
+        { _id: 3, customerName: 'Елена С.', serviceName: 'Маникюр', date: '2024-01-16', time: '10:00', status: 'подтвержден', price: 1500 },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleBooking = async () => {
+    if (!selectedService || !customerName || !customerPhone || !selectedTime) {
+      error('Пожалуйста, заполните все поля');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const orderData = {
+        customerName,
+        customerPhone,
+        businessType,
+        serviceName: selectedService.name,
+        serviceId: selectedService.id,
+        price: selectedService.price,
+        date: selectedDate.toISOString(),
+        time: selectedTime,
+        status: 'новый',
+      };
+
+      const response = await createOrder(orderData);
+      if (response.success) {
+        success('Запись успешно создана!');
+        setCustomerName('');
+        setCustomerPhone('');
+        setSelectedTime('');
+        setSelectedService(null);
+        loadOrders();
+      }
+    } catch (err) {
+      console.error('Error creating order:', err);
+      error('Ошибка при создании записи. Попробуйте еще раз.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getStatusColor = (status) => {
@@ -112,13 +162,31 @@ const OrderAutomation = ({ businessType }) => {
               </div>
             </div>
 
+            {/* Customer Info */}
+            <div className="mb-4 space-y-3">
+              <input
+                type="text"
+                placeholder="Имя клиента"
+                value={customerName}
+                onChange={(e) => setCustomerName(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+              <input
+                type="tel"
+                placeholder="Телефон"
+                value={customerPhone}
+                onChange={(e) => setCustomerPhone(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+
             {/* Booking Button */}
             <button
               onClick={handleBooking}
-              disabled={!selectedTime}
+              disabled={!selectedTime || !customerName || !customerPhone || loading}
               className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Забронировать
+              {loading ? 'Создание...' : 'Забронировать'}
             </button>
 
             <div className="mt-4 p-4 bg-blue-50 rounded-lg">
@@ -137,13 +205,13 @@ const OrderAutomation = ({ businessType }) => {
             <div className="space-y-4">
               {orders.map((order) => (
                 <div
-                  key={order.id}
+                  key={order._id || order.id}
                   className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary-300 transition-all"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <h4 className="font-bold text-gray-900">{order.customer}</h4>
-                      <p className="text-sm text-gray-600">{order.service}</p>
+                      <h4 className="font-bold text-gray-900">{order.customerName || order.customer}</h4>
+                      <p className="text-sm text-gray-600">{order.serviceName || order.service}</p>
                     </div>
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(order.status)}`}>
                       {order.status}
@@ -151,7 +219,8 @@ const OrderAutomation = ({ businessType }) => {
                   </div>
                   <div className="flex justify-between items-center mt-3">
                     <div className="text-sm text-gray-600">
-                      <span className="font-semibold">{order.date}</span> в <span className="font-semibold">{order.time}</span>
+                      <span className="font-semibold">{new Date(order.date).toLocaleDateString('ru-RU')}</span>
+                      {order.time && <span> в <span className="font-semibold">{order.time}</span></span>}
                     </div>
                     <span className="text-lg font-bold text-primary-600">{order.price} ₸</span>
                   </div>
