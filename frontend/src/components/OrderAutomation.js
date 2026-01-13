@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ScrollAnimation from './ScrollAnimation';
 import { createOrder, getOrders } from '../utils/api';
+import { getDemoData } from '../utils/api';
 import { useToast } from '../context/ToastContext';
 
 const OrderAutomation = ({ businessType }) => {
@@ -10,6 +11,7 @@ const OrderAutomation = ({ businessType }) => {
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [orders, setOrders] = useState([]);
+  const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(false);
   const { success, error } = useToast();
 
@@ -17,7 +19,20 @@ const OrderAutomation = ({ businessType }) => {
 
   useEffect(() => {
     loadOrders();
+    loadServices();
   }, [businessType]);
+
+  const loadServices = async () => {
+    try {
+      const response = await getDemoData(businessType);
+      if (response.success) {
+        const servicesList = response.data.services || response.data.products || [];
+        setServices(servicesList);
+      }
+    } catch (err) {
+      console.error('Error loading services:', err);
+    }
+  };
 
   const loadOrders = async () => {
     try {
@@ -108,6 +123,31 @@ const OrderAutomation = ({ businessType }) => {
           <div className="card">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Онлайн-бронирование</h3>
             
+            {/* Service Selection */}
+            {services.length > 0 && (
+              <div className="mb-6">
+                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                  Выберите услугу/товар:
+                </label>
+                <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto">
+                  {services.map((service) => (
+                    <button
+                      key={service.id}
+                      onClick={() => setSelectedService(service)}
+                      className={`p-3 rounded-lg text-sm font-medium transition-all text-left ${
+                        selectedService?.id === service.id
+                          ? 'bg-gradient-to-r from-primary-600 to-accent-500 text-white shadow-lg'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      <div className="font-semibold">{service.name}</div>
+                      <div className="text-xs opacity-75">{service.price} ₸</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Calendar */}
             <div className="mb-6">
               <div className="grid grid-cols-7 gap-2 mb-4">
@@ -183,11 +223,19 @@ const OrderAutomation = ({ businessType }) => {
             {/* Booking Button */}
             <button
               onClick={handleBooking}
-              disabled={!selectedTime || !customerName || !customerPhone || loading}
+              disabled={!selectedService || !selectedTime || !customerName || !customerPhone || loading}
               className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Создание...' : 'Забронировать'}
             </button>
+            
+            {selectedService && (
+              <div className="mt-4 p-3 bg-primary-50 rounded-lg">
+                <p className="text-sm text-gray-700">
+                  <strong>Выбрано:</strong> {selectedService.name} - {selectedService.price} ₸
+                </p>
+              </div>
+            )}
 
             <div className="mt-4 p-4 bg-blue-50 rounded-lg">
               <p className="text-sm text-blue-800">
